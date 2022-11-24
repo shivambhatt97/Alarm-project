@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alarm Clock</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
   </head>
   <body>
     <div id="alarm">
@@ -35,6 +35,7 @@
       </form>
       <!-- alarm button -->
       <input type="button" value="Set Alarm" id="set-alarm-btn">
+      
       <div class="line"></div>
       <!-- value alarm is set -->
       <h2>Alarm</h2>
@@ -45,6 +46,10 @@
         </ul>
       </div>
     </div>
+    <div class="popup-box">
+        Wake up and close your alarm!!
+        <span id="close-pop">x</span>
+      </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>
   </body>
