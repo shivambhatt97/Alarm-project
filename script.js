@@ -1,52 +1,51 @@
-var selectVal = $('#alarm-values select').children();
-var timeVal = $('#alarm-values select');
-var form = $('#alarm-values').children();
-var list = $('#list');
-var delBtn = $('#list input');
-
+var selectVal = document.querySelectorAll('#alarm-values select');
+var timeVal = document.querySelectorAll('#alarm-values select');
+var form = document.querySelectorAll('#alarm-values');
+var list = document.getElementById('list');
+var delBtn = document.getElementById('list input');
+var myPopup = document.querySelector(".popup-box");
+var btnClose = document.querySelector("#close-pop");
 var sound = new Audio('alarmm.mp3');
 sound.loop = true;
 
+//create a function to use for the select droupdown
+function loop(st, en, element) {
+    for (let i = st; i <= en; i++) {
+        const list = document.createElement("option");
+        list.value = i < 10 ? "0" + i : i;
+        list.innerHTML = i < 10 ? "0" + i : i;
+        element.appendChild(list);
+    }
+}
 //add dropdown values in the form
 function dropdownVal() {
-    for (let i = 12; i >= 1; i--) {
-        i = i < 10 ? "0" + i : i;
-        let option = `<option value=${i}>${i}</option>`;
-        $(selectVal[0]).after(option);
 
-    }
-
-    for (let i = 59; i >= 0; i--) {
-        i = i < 10 ? "0" + i : i;
-        let option = `<option value=${i}>${i}</option>`;
-        $(selectVal[1]).after(option);
-    }
-    for (let i = 59; i >= 0; i--) {
-        i = i < 10 ? "0" + i : i;
-        let option = `<option value=${i}> ${i} </option>`;
-        $(selectVal[2]).after(option)
-    }
+    loop(1, 12, selectVal[0]);
+    loop(0, 59, selectVal[1]);
+    loop(0, 59, selectVal[2]);
 
     for (let i = 0; i <= 1; i++) {
-        let ap = i === 0 ? "PM" : "AM";
-        let option = `<option value=${ap}>${ap}</option>`;
-        $(selectVal[3]).after(option)
+        const list = document.createElement("option");
+        list.value = i === 0 ? "AM" : "PM";
+        list.innerHTML = i === 0 ? "AM" : "PM";
+        selectVal[3].appendChild(list);
 
     }
 }
+
+
 dropdownVal();
 //create var that can contain list of alarms
 var alarm_list = [];
 
-$("#set-alarm-btn").click(function(e) {
+document.getElementById("set-alarm-btn").onclick = function(e) {
     //getting option val of time
-    var hr = $(timeVal[0]).val();
-    var min = $(timeVal[1]).val();
-    var sec = $(timeVal[2]).val();
-    var ap = $(timeVal[3]).val();
+    var hr = timeVal[0].value;
+    var min = timeVal[1].value;
+    var sec = timeVal[2].value;
+    var ap = timeVal[3].value;
 
     var alarm_time = `${hr}:${min}:${sec} ${ap}`;
-    // console.log(alarm_time.includes("hr"));
     if (alarm_time.includes("hour") || alarm_time.includes("Min") || alarm_time.includes("Sec") || alarm_time.includes("duration")) {
         window.alert("Invalid values");
         return;
@@ -67,8 +66,10 @@ $("#set-alarm-btn").click(function(e) {
 
     form[0].reset;
 
-})
+}
 
+
+//render alaram list with delete button
 function render() {
     document.getElementById('list').innerHTML = '';
     for (let i = 0; i < alarm_list.length; i++) {
@@ -76,17 +77,20 @@ function render() {
     }
 }
 
+
+//data will send to dom
 function sendToDom(element, i) {
-    let li = $(`<li>
-    <span>${element}</span>
-    <input type="button" value="Delete" id=${i} onclick="Delete(${i})">
-    </li>`);
-    list.append(li);
+    let newli = document.createElement("li");
+    newli.innerHTML = `
+        <span>${element}</span>
+        <input type="button" value="Delete" id=${i} onclick="Delete(${i})">
+        `;
+    list.appendChild(newli);
 
 }
 
+// add zero on time
 function addZero(time) {
-
     return (time < 10) ? "0" + time : time;
 
 }
@@ -105,24 +109,33 @@ function currtime() {
 
     let time = addZero(hour) + ":" + addZero(currentTime.getMinutes()) + ":" + addZero(currentTime.getSeconds()) + " " + ampm;
 
-    $(`#currtime`).text(time)
+    document.getElementById("currtime").innerText = time;
     for (let i = 0; i < alarm_list.length; i++) {
         if (alarm_list[i] === time) {
-            window.alert("Wake up and close the alarm!!");
+            // window.alert("Wake up and close the alarm!!");
             sound.play();
-            setTimeout(function() {
+            poPup();
+            btnClose.onclick = function() {
+                myPopup.style.display = "none";
+                document.getElementById("alarm").style.filter = "blur(0px)";
                 sound.pause();
-            }, 5000);
-            Delete(i);
+                Delete(i);
+            };
+
             render();
         }
     }
 }
 
+//model show when alarm will ringing
+function poPup() {
+    document.getElementById("alarm").style.filter = "blur(7px)";
+    myPopup.style.display = "block";
+}
 
 //delete
 function Delete(id) {
-    console.log(id);
+    // console.log(id);
     alarm_list.splice(id, 1);
     console.log(alarm_list);
     render();
