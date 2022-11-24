@@ -1,58 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alarm Clock</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-</head>
-<body>
-<div id="alarm">
-    <div id="title">
+  </head>
+  <body>
+    <div id="alarm">
+      <div id="title">
         <img src="clock.png">
-    </div>
-    <h2>Alarm Clock</h2>
-    <!-- Display current time -->
-    <div id="ctime-container">
+      </div>
+      <h2>Alarm Clock</h2>
+      <!-- Display current time -->
+      <div id="ctime-container">
         <span id="currtime"></span>
-    </div>
-    <!-- Create form with different field dropdown -->
-    <form id="alarm-values">
+      </div>
+      <!-- Create form with different field dropdown -->
+      <form id="alarm-values">
         <select id="HH" required>
-            <option value="hour" selected hidden>Hour</option>
+          <option value="hour" selected hidden>Hour</option>
         </select>
         <select id="MM" required>
-            <option value="Min" selected hidden>Min</option>
+          <option value="Min" selected hidden>Min</option>
         </select>
         <select id="SS" required>
-            <option value="Sec" selected hidden>Sec</option>
+          <option value="Sec" selected hidden>Sec</option>
         </select>
         <select id="AP" required>
-            <option value="duration" selected hidden>AM/PM</option>
+          <option value="duration" selected hidden>AM/PM</option>
         </select>
-
-    </form>
-<!-- alarm button -->
-<input type="button" value="Set Alarm" id="set-alarm-btn">
-<div class="line"></div>
-
-<!-- value alarm is set -->
-<h2>Alarm</h2>
-<div id="alarm-list-container">
-    <ul id="list">
-        <!-- alarm time -->
-        <!-- delete button  -->
-    </ul>
-</div>
-</div>
-
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="script.js"></script>
-</body>
+      </form>
+      <!-- alarm button -->
+      <input type="button" value="Set Alarm" id="set-alarm-btn">
+      <div class="line"></div>
+      <!-- value alarm is set -->
+      <h2>Alarm</h2>
+      <div id="alarm-list-container">
+        <ul id="list">
+          <!-- alarm time -->
+          <!-- delete button  -->
+        </ul>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
