@@ -95,12 +95,19 @@ function addZero(time) {
 
 function currtime(){
     let currentTime= new Date();
+    let hour = currentTime.getHours();
+    if(hour === 0){
+        hour = 12;
+    }
+    if(hour > 12){
+        hour = hour - 12;
+     }
     let ampm = currentTime.getHours() >= 12 ? 'PM' : 'AM';
-    let time= addZero(currentTime.getHours() % 12) + ":" + addZero(currentTime.getMinutes()) + ":" + addZero(currentTime.getSeconds()) + " " + ampm ;
+    
+    let time= addZero(hour)  + ":" + addZero(currentTime.getMinutes()) + ":" + addZero(currentTime.getSeconds()) + " " + ampm ;
     
     $(`#currtime`).text(time)
     for(let i=0;i<alarm_list.length;i++){
-        // console.log(alarm_list[i]+" "+ currentTime);
         if(alarm_list[i] === time){
             window.alert("Wake up and close the alarm!!");
             sound.play();
